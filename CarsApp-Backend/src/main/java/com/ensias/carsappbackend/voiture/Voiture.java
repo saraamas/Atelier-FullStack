@@ -33,4 +33,14 @@ public class Voiture {
     @JsonIgnore
 
     private Proprietaire proprietaire;
+
+    public Voiture(@NonNull String marque, @NonNull String modele, @NonNull String couleur, @NonNull String immatricule, @NonNull int annee, @NonNull int prix) {
+
+        this.marque = marque;
+        this.modele = modele;
+        this.couleur = couleur;
+        this.immatricule = immatricule;
+        this.annee = annee;
+        this.prix = prix;
+    }
 }

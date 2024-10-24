@@ -1,0 +1,60 @@
+version: '3'
+services:
+  backend:
+    image: carsapp-backend
+    build: ./CarsApp-Backend
+    container_name: spring-backend
+    ports:
+      - "8080:8080"
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    networks:
+      - app-network
+
+  frontend:
+    image: carsapp-frontend
+    build: ./app-front
+    container_name: react-frontend
+    ports:
+      - "3000:80"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yaml
+    ports:
+      - "9090:9090"
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin # set the Grafana admin password
+    ports:
+      - "3001:3001"
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: compagnie
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+volumes:
+  pgdata:
