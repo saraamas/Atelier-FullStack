@@ -65,23 +65,12 @@ All services are connected via the `app-network` to allow seamless communication
    git clone https://github.com/saraamas/Atelier-FullStack.git
    cd Atelier-FullStack
 
-2. **Build and run the containers using Docker Compose:**
 
-    ```bash
-    docker-compose up --build
-    ```
-
-3. **Access the application:**
+2. **Access the application:**
     - Frontend: [http://localhost:3000](http://localhost:3000)
     - Backend: [http://localhost:8080](http://localhost:8080)
     - Grafana: [http://localhost:3001](http://localhost:3001) (Username: `admin`, Password: `admin123`)
     - Prometheus: [http://localhost:9090](http://localhost:9090)
-
-    To shut down the services:
-
-    ```bash
-    docker-compose down
-    ```
 
 
 🔧 **Configuration**
@@ -93,15 +82,15 @@ Make sure to configure the environment variables correctly:
    Navigate to the backend directory and build the Docker image for the Spring Boot application:
 
     ```bash
-    cd carsapp-backend
-    docker build -t carsapp-backend .
+    cd CarsApp-Backend
+    docker build -t carsApp-backend .
     ```
 
 2. **Build Frontend Docker Image**:  
    Navigate to the frontend directory and build the Docker image for the ReactJS application:
 
     ```bash
-    cd app-frontt
+    cd app-front
     docker build -t carsapp-frontend .
 
 3. **Database (PostgreSQL)**:  
@@ -113,6 +102,19 @@ Make sure to configure the environment variables correctly:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
     ```
+
+4. **Build and run the containers using Docker Compose:**
+
+    ```bash
+    docker-compose up --build
+    ```
+
+   To shut down the services:
+
+    ```bash
+    docker-compose down
+    ```
+
 
 ---
 
