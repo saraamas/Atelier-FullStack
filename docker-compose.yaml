@@ -25,6 +25,7 @@ services:
     depends_on:
       - backend
 
+
   prometheus:
     image: prom/prometheus
     container_name: prometheus
@@ -32,13 +33,20 @@ services:
       - ./prometheus.yaml:/etc/prometheus/prometheus.yaml
     ports:
       - "9090:9090"
+    networks:
+      - app-network
+
   grafana:
     image: grafana/grafana
-    container_name: grafana
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin # set the Grafana admin password
     ports:
-      - "3001:3001"
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+    depends_on:
+      - prometheus
+    networks:
+      - app-network
 
   postgres:
     image: postgres
@@ -55,6 +63,6 @@ services:
 
 networks:
   app-network:
-    driver: bridge
+
 volumes:
   pgdata:
