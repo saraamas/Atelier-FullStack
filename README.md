@@ -88,25 +88,23 @@ All services are connected via the `app-network` to allow seamless communication
 
 Make sure to configure the environment variables correctly:
 
-- **Backend**:  
-  Set the database host and credentials in the `docker-compose.yml` under the `backend` service:
 
-    ```yaml
-    environment:
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: 5432
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: admin
+1. **Build Backend Docker Image**:  
+   Navigate to the backend directory and build the Docker image for the Spring Boot application:
+
+    ```bash
+    cd carsapp-backend
+    docker build -t carsapp-backend .
     ```
 
-- **Frontend**:  
-  Ensure the correct build context for the frontend is specified in `docker-compose.yml`:
+2. **Build Frontend Docker Image**:  
+   Navigate to the frontend directory and build the Docker image for the ReactJS application:
 
-    ```yaml
-    build: ./app-frontt
-    ```
+    ```bash
+    cd app-frontt
+    docker build -t carsapp-frontend .
 
-- **Database (PostgreSQL)**:  
+3. **Database (PostgreSQL)**:  
   Ensure the correct database and user credentials are defined:
 
     ```yaml
